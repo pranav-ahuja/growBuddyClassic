@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:grow_buddy_app/constant.dart';
 import 'package:grow_buddy_app/pages/login_page.dart';
 import 'package:grow_buddy_app/pages/resgister_page.dart';
+import 'package:grow_buddy_app/pages/signup/who_are_you.dart';
 import 'package:grow_buddy_app/utilities/home_utilities/floating_action_button.dart';
 import 'package:grow_buddy_app/utilities/home_utilities/image_slider.dart';
 import 'package:grow_buddy_app/utilities/home_utilities/home_page_heading.dart';
@@ -40,19 +41,13 @@ class _HomePageState extends State<HomePage> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => RegisterPage(),
+                builder: (context) => WhoAreYou(),
               ),
             );
           },
         );
       },
-      // offset: const Offset(0, 530),
-      // alignment: Alignment.center,
-      // useSafeArea: false,
-      // dimBackground: true,
     );
-    // if (result == null) return;
-    setState(() {});
   }
 
   @override

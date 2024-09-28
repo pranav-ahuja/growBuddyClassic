@@ -2,8 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:grow_buddy_app/constant.dart';
+import 'package:grow_buddy_app/pages/forget%20password/forget_password.dart';
 import 'package:grow_buddy_app/pages/resgister_page.dart';
+import 'package:grow_buddy_app/utilities/common/gb_buttons.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:grow_buddy_app/utilities/functions/commonFunctions.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -14,7 +17,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   String emailAddress = "";
   String password = "";
-  late String errorMessage;
+  late String errorMessage = "Hi";
   final TextEditingController controller = TextEditingController();
   bool isPasswordHidden = true;
   bool isCheckBoxChecked = false;
@@ -29,6 +32,23 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+  String? get _errorValidationEmail {
+    final textValidation = controller.value.text;
+
+    if (textValidation.isEmpty) return "This field Can\'t be empty";
+
+    return null;
+  }
+
+  String? get _errorValidationPassword {
+    final textValidation = controller.value.text;
+
+    if (textValidation.isEmpty) return "This field can\'t be empty";
+    if (textValidation.length < 8) return "Password length is less than 8";
+
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
         title: Text("Login"),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(20.0),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,36 +66,43 @@ class _LoginPageState extends State<LoginPage> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  buildHeaderText(
                     "Welcome back to Grow Buddy",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: kHeadingOneText,
-                    ),
-                    textAlign: TextAlign.left,
+                    kHeaderTextStyle,
                   ),
-                  Text(
+                  buildHeaderText(
                     "Manage your classroom, all in one place. Enter your email and password to continue",
-                    style: TextStyle(
-                      fontSize: kHeadingTwoText,
-                      fontWeight: FontWeight.w300,
-                    ),
-                    textAlign: TextAlign.left,
+                    kHeader2TextStyle,
                   ),
                   SizedBox(
-                    height: 50,
+                    height: 20,
                   ),
                   Column(
                     children: [
                       TextField(
                         onChanged: (value) {
-                          emailAddress = value;
-                          if (emailAddress != "" && password != "") {
-                            setState(() {
+                          setState(() {
+                            emailAddress = value;
+                            print(emailAddress);
+                            if (emailAddress != "" &&
+                                password != "" &&
+                                emailAddress.contains('@') &&
+                                (emailAddress.endsWith(".com") ||
+                                    emailAddress.endsWith(".co") ||
+                                    emailAddress.endsWith(".in"))) {
                               loginButtonColor = kPrimaryColor1;
                               loginTextColor = kPrimaryColor2;
-                            });
-                          } else {}
+                            } else if (emailAddress == "" ||
+                                password == "" ||
+                                password.length < 8 ||
+                                emailAddress.endsWith(".com") == false ||
+                                emailAddress.endsWith(".co") == false ||
+                                emailAddress.endsWith(".in") == false ||
+                                emailAddress.contains('@') == false) {
+                              loginButtonColor = Colors.grey;
+                              loginTextColor = Colors.black45;
+                            }
+                          });
                         },
                         controller: controller,
                         decoration: InputDecoration(
@@ -94,6 +121,7 @@ class _LoginPageState extends State<LoginPage> {
                               });
                             },
                           ),
+                          errorText: _errorValidationEmail,
                         ),
                         keyboardType: TextInputType.emailAddress,
                       ),
@@ -102,13 +130,21 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       TextField(
                         onChanged: (value) {
-                          password = value;
-                          if (emailAddress != "" && password != "") {
-                            setState(() {
+                          setState(() {
+                            password = value;
+                            print(password);
+                            if (emailAddress != "" &&
+                                password != "" &&
+                                password.length >= 8) {
                               loginButtonColor = kPrimaryColor1;
                               loginTextColor = kPrimaryColor2;
-                            });
-                          }
+                            } else if (emailAddress == "" ||
+                                password == "" ||
+                                password.length < 8) {
+                              loginButtonColor = Colors.grey;
+                              loginTextColor = Colors.black45;
+                            }
+                          });
                         },
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
@@ -127,6 +163,7 @@ class _LoginPageState extends State<LoginPage> {
                               });
                             },
                           ),
+                          errorText: _errorValidationPassword,
                         ),
                         keyboardType: TextInputType.visiblePassword,
                         obscureText: isPasswordHidden,
@@ -150,16 +187,27 @@ class _LoginPageState extends State<LoginPage> {
                       });
                     },
                   ),
-                  Text(
-                    "Remember Me",
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      color: rememberMeColor,
+                  TextButton(
+                    onPressed: () {
+                      setState(() {
+                        isCheckBoxChecked = !isCheckBoxChecked;
+                        rememberMeColor =
+                            isCheckBoxChecked ? kPrimaryColor1 : Colors.black45;
+                        checkButtonColor =
+                            isCheckBoxChecked ? kPrimaryColor1 : kPrimaryColor2;
+                      });
+                    },
+                    child: Text(
+                      "Remember Me",
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        color: rememberMeColor,
+                      ),
                     ),
-                  ),
+                  )
                 ],
               ),
-              showErrorWidget(errorMessage),
+              // showErrorWidget(errorMessage),
               Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -169,8 +217,13 @@ class _LoginPageState extends State<LoginPage> {
                         SizedBox(
                           width: double.infinity,
                           // height: 50.0,
-                          child: ElevatedButton(
-                            onPressed: () {
+                          child: GB_ElevatedButton(
+                            buttonTextSize: 20.0,
+                            buttonColor: loginButtonColor,
+                            buttonText: "Login",
+                            buttonTextColor: loginTextColor,
+                            buttonBorderColor: loginButtonColor,
+                            buttonPressed: () {
                               if (loginButtonColor == kPrimaryColor1) {
                                 Navigator.push(
                                   context,
@@ -180,21 +233,58 @@ class _LoginPageState extends State<LoginPage> {
                                 );
                               }
                             },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: loginButtonColor,
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Text(
-                                "Login",
-                                style: TextStyle(
-                                    color: loginTextColor, fontSize: 20.0),
-                              ),
-                            ),
                           ),
+                          // child: ElevatedButton(
+                          //   onPressed: () {
+                          //
+                          //   },
+                          //   style: ElevatedButton.styleFrom(
+                          //     backgroundColor: loginButtonColor,
+                          //   ),
+                          //   child: Padding(
+                          //     padding: const EdgeInsets.all(10.0),
+                          //     child: Text(
+                          //       "Login",
+                          //       style: TextStyle(
+                          //           color: loginTextColor, fontSize: 20.0),
+                          //     ),
+                          //   ),
+                          // ),
                         ),
                       ],
-                    )
+                    ),
+                  ],
+                ),
+              ),
+              Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ForgetPassword(),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        "Forgot Password?",
+                        style: TextStyle(
+                          color: forgetSignUpColor,
+                        ),
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        "New to Grow Buddy? Sign up now!",
+                        style: TextStyle(
+                          color: forgetSignUpColor,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               )

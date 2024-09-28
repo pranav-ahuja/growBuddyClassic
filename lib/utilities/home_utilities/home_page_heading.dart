@@ -24,7 +24,7 @@ class HomePageHeads extends StatelessWidget {
           style: TextStyle(
             fontSize: kHeadingTwoText,
             color: kTextColor,
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w400,
           ),
           textAlign: TextAlign.center,
         ),

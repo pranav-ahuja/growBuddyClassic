@@ -31,7 +31,7 @@ class GrowBuddy extends StatelessWidget {
           ),
         ),
         onAnimationEnd: () => print("On Fade In End"),
-        nextScreen: LoginPage(),
+        nextScreen: HomePage(),
       ),
     );
   }
