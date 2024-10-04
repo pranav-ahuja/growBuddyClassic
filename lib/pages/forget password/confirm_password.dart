@@ -40,10 +40,16 @@ class _ConfirmPasswordState extends State<ConfirmPassword> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Image.asset('assets/images/confirm_password.png'),
-                buildHeaderText("Enter new password", kHeaderTextStyle),
                 buildHeaderText(
-                    "Your new password must be different from the previous passwords.",
-                    kHeader2TextStyle),
+                  "Enter new password",
+                  kHeaderTextStyle,
+                  TextAlign.left,
+                ),
+                buildHeaderText(
+                  "Your new password must be different from the previous passwords.",
+                  kHeader2TextStyle,
+                  TextAlign.left,
+                ),
                 SizedBox(
                   height: 20.0,
                 ),

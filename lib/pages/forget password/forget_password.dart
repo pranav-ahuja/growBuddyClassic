@@ -40,10 +40,13 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                 buildHeaderText(
                   "Please enter yout registered email ID",
                   kHeaderTextStyle,
+                  TextAlign.left,
                 ),
                 buildHeaderText(
-                    "We will send a verification code to your registered email ID.",
-                    kHeader2TextStyle),
+                  "We will send a verification code to your registered email ID.",
+                  kHeader2TextStyle,
+                  TextAlign.left,
+                ),
                 SizedBox(
                   height: 20,
                 ),

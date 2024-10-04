@@ -69,10 +69,12 @@ class _LoginPageState extends State<LoginPage> {
                   buildHeaderText(
                     "Welcome back to Grow Buddy",
                     kHeaderTextStyle,
+                    TextAlign.left,
                   ),
                   buildHeaderText(
                     "Manage your classroom, all in one place. Enter your email and password to continue",
                     kHeader2TextStyle,
+                    TextAlign.left,
                   ),
                   SizedBox(
                     height: 20,

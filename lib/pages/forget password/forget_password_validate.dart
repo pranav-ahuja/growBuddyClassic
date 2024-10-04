@@ -42,10 +42,15 @@ class _ForgetPasswordValidationState extends State<ForgetPasswordValidation> {
                   height: 20.0,
                 ),
                 buildHeaderText(
-                    "Please enter your verification code", kHeaderTextStyle),
+                  "Please enter your verification code",
+                  kHeaderTextStyle,
+                  TextAlign.left,
+                ),
                 buildHeaderText(
-                    "We have sent a verification code to your registered email ID.",
-                    kHeader2TextStyle),
+                  "We have sent a verification code to your registered email ID.",
+                  kHeader2TextStyle,
+                  TextAlign.left,
+                ),
                 SizedBox(
                   height: 50.0,
                 ),
