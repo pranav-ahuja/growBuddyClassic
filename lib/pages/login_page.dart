@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:grow_buddy_app/constant.dart';
 import 'package:grow_buddy_app/pages/forget%20password/forget_password.dart';
+import 'package:grow_buddy_app/pages/main%20pages/home_screen.dart';
 import 'package:grow_buddy_app/pages/resgister_page.dart';
 import 'package:grow_buddy_app/utilities/common/gb_buttons.dart';
 import 'package:ionicons/ionicons.dart';
@@ -35,7 +36,11 @@ class _LoginPageState extends State<LoginPage> {
   String? get _errorValidationEmail {
     final textValidation = controller.value.text;
 
-    if (textValidation.isEmpty) return "This field Can\'t be empty";
+    if (!(emailAddress.contains('@')) &&
+        !(emailAddress.contains(".com") ||
+            emailAddress.contains(".in") ||
+            emailAddress.contains(".co")) &&
+        emailAddress.isNotEmpty) return "Email ID is incorrect";
 
     return null;
   }
@@ -226,32 +231,21 @@ class _LoginPageState extends State<LoginPage> {
                             buttonTextColor: loginTextColor,
                             buttonBorderColor: loginButtonColor,
                             buttonPressed: () {
-                              if (loginButtonColor == kPrimaryColor1) {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => RegisterPage(),
-                                  ),
-                                );
-                              }
+                              //To Test
+                              //TODO 1 remove this
+                              setState(() {
+                                loginButtonColor = kPrimaryColor1;
+                                if (loginButtonColor == kPrimaryColor1) {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => HomeScreen(),
+                                    ),
+                                  );
+                                }
+                              });
                             },
                           ),
-                          // child: ElevatedButton(
-                          //   onPressed: () {
-                          //
-                          //   },
-                          //   style: ElevatedButton.styleFrom(
-                          //     backgroundColor: loginButtonColor,
-                          //   ),
-                          //   child: Padding(
-                          //     padding: const EdgeInsets.all(10.0),
-                          //     child: Text(
-                          //       "Login",
-                          //       style: TextStyle(
-                          //           color: loginTextColor, fontSize: 20.0),
-                          //     ),
-                          //   ),
-                          // ),
                         ),
                       ],
                     ),
@@ -274,7 +268,7 @@ class _LoginPageState extends State<LoginPage> {
                       child: Text(
                         "Forgot Password?",
                         style: TextStyle(
-                          color: forgetSignUpColor,
+                          color: kForgetSignUpColor,
                         ),
                       ),
                     ),
@@ -283,7 +277,7 @@ class _LoginPageState extends State<LoginPage> {
                       child: Text(
                         "New to Grow Buddy? Sign up now!",
                         style: TextStyle(
-                          color: forgetSignUpColor,
+                          color: kForgetSignUpColor,
                         ),
                       ),
                     ),

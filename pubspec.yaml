@@ -76,6 +76,7 @@ flutter:
 #    - assets/images/forget_password_verification.png
 #    - assets/images/confirm_password.png
     - assets/images/
+    - assets/images/features_of_class/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

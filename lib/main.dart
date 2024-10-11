@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:another_flutter_splash_screen/another_flutter_splash_screen.dart';
-import 'package:grow_buddy_app/pages/home_page.dart';
-import 'package:grow_buddy_app/main.dart';
-import 'package:grow_buddy_app/pages/login_page.dart';
+import 'package:grow_buddy_app/pages/start_page.dart';
 
 void main() {
   runApp(GrowBuddy());

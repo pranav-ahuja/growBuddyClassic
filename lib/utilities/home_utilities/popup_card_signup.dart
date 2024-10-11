@@ -29,7 +29,7 @@ class LoginSignUpPopCard extends StatelessWidget {
       backgroundColor: Colors.white,
       child: Container(
         padding: EdgeInsets.all(20.0),
-        height: 300,
+        height: 350,
         width: double.infinity,
         child: Column(
           // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -59,7 +59,7 @@ class LoginSignUpPopCard extends StatelessWidget {
                     buttonBorderColor: kPrimaryColor1,
                     buttonTextColor: kPrimaryColor1,
                     buttonPressed: loginPage,
-                    buttonTextSize: 12.0,
+                    buttonTextSize: 17.0,
                   ),
                   SizedBox(
                     height: 20,
@@ -70,7 +70,7 @@ class LoginSignUpPopCard extends StatelessWidget {
                     buttonBorderColor: kPrimaryColor1,
                     buttonTextColor: kPrimaryColor2,
                     buttonPressed: signUpPage,
-                    buttonTextSize: 12.0,
+                    buttonTextSize: 17.0,
                   ),
                 ],
               ),

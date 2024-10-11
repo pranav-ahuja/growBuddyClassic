@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:grow_buddy_app/constant.dart';
 import 'package:grow_buddy_app/pages/forget%20password/forget_password_validate.dart';
-import 'package:grow_buddy_app/pages/home_page.dart';
+import 'package:grow_buddy_app/pages/start_page.dart';
 import 'package:grow_buddy_app/utilities/common/gb_buttons.dart';
 import 'package:grow_buddy_app/utilities/functions/commonFunctions.dart';
 import 'package:ionicons/ionicons.dart';
